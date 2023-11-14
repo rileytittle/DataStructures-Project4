@@ -2,14 +2,22 @@
 public class Node {
 	private String countryName;
 	private double happinessIndex;
-	private Node leftChild;
-	private Node rightChild;
+	public Node leftChild;
+	public Node rightChild;
 	
 	public Node(String countryName, double happinessIndex){
 		this.countryName = countryName;
 		this.happinessIndex = happinessIndex;
 		leftChild = null;
 		rightChild = null;
+	}
+	
+	public String getName(){
+		return countryName;
+	}
+	
+	public double getHappiness(){
+		return happinessIndex;
 	}
 	
 	public void print(){
