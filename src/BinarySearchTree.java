@@ -28,9 +28,20 @@ public class BinarySearchTree {
 					if(current == null){
 						parent.rightChild = newNode;
 						return;
-					}
-				}
-			}
+					}//end if
+				}//end else
+			}//end while loop
+		}//end else
+	}//end insert method
+	public void printPreOrder(){
+		preOrder(root);
+	}
+	private void preOrder(Node localRoot){
+		if(localRoot != null){
+			localRoot.print();
+			preOrder(localRoot.leftChild);
+			preOrder(localRoot.rightChild);
 		}
 	}
-}
+	
+}//end BinarySearchTree class
