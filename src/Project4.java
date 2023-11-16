@@ -118,10 +118,10 @@ public class Project4 {
 				theTree.find(nameToFind);
 				break;
 			case 7:
-				//write method 
+				
 				break;
 			case 8:
-				//write method
+				theTree.printTopCountries(5); 
 				break;
 			case 9:
 				programNotFinished = false;

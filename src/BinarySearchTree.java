@@ -176,7 +176,15 @@ public class BinarySearchTree {
 		}
 	}
 	
+	public void preOrderReturnHappiness(Node localRoot, Node max) {
+		
+	}
+	
 	public void printBottomCountries(int c){
 		
+	}
+	
+	public void printTopCountries(int c) {
+		//use priorityq?
 	}
 }//end BinarySearchTree class
