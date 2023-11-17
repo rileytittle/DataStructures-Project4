@@ -109,16 +109,25 @@ public class Project4 {
 			switch(Integer.parseInt(menuChoice)){
 			case 1:
 				System.out.println();
+				System.out.println("Inorder Traversal:");
+				System.out.printf("%-38s%-18s\n", "Name", "Happiness");
+				System.out.println("---------------------------------------------------");
 				theTree.printInorder();
 				System.out.println();
 				break;
 			case 2:
 				System.out.println();
+				System.out.println("Preorder Traversal:");
+				System.out.printf("%-38s%-18s\n", "Name", "Happiness");
+				System.out.println("---------------------------------------------------");
 				theTree.printPreOrder();
 				System.out.println();
 				break;
 			case 3:
 				System.out.println();
+				System.out.println("Postorder Traversal:");
+				System.out.printf("%-38s%-18s\n", "Name", "Happiness");
+				System.out.println("---------------------------------------------------");
 				theTree.printPostorder();
 				System.out.println();
 				break;

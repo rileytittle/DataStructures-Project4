@@ -34,7 +34,7 @@ public class BinarySearchTree {
 	 * @param happiness the happiness index of the inserted country
 	 */
 	private void insertMessage(String name, double happiness){
-		System.out.println("\n" + name + "with happiness of " + happiness + " is inserted.");
+		System.out.println("\n" + name + " with happiness of " + happiness + " is inserted.\n");
 	}
 	
 	/**
@@ -108,12 +108,12 @@ public class BinarySearchTree {
 				current = current.rightChild;
 			}
 			if(current == null){
-				System.out.println("\n" + name + " is not found");
+				System.out.println("\n" + name + " is not found\n");
 				return -1;
 			}
 		}//end else
-		System.out.println(name + " is found with happiness of " + current.getHappiness() + "\n");
-		System.out.println("Path to " + name + " is " + path + name);
+		System.out.println(name + " is found with happiness of " + current.getHappiness());
+		System.out.println("Path to " + name + " is " + path + name + "\n");
 		return current.getHappiness();
 	}//end find method
 	
@@ -272,6 +272,9 @@ public class BinarySearchTree {
 	 * @param c the number of bottom countries to print
 	 */
 	public void printBottomCountries(int c){
+		if(c > numOfNodes){
+			c = numOfNodes;
+		}
 		Node[] nodeArray = new Node[numOfNodes];
 		Node[] bottomCountries = new Node[c];
 		getAllNodes(root, nodeArray);
@@ -279,7 +282,7 @@ public class BinarySearchTree {
 		Node min;
 		Node previousMin = new Node("first", 0.0);
 		for(int i = 0; i < c; i++){
-			min = nodeArray[0];
+			min = new Node("min", 10.0);
 			for(int j = 0; j < nodeArray.length; j++){
 				if(nodeArray[j].getHappiness() < min.getHappiness() && nodeArray[j].getHappiness() > previousMin.getHappiness()){
 					min = nodeArray[j];
@@ -299,6 +302,9 @@ public class BinarySearchTree {
 	 * @param c the number of top countries to print
 	 */
 	public void printTopCountries(int c) {
+		if(c > numOfNodes){
+			c = numOfNodes;
+		}
 		Node[] nodeArray = new Node[numOfNodes];
 		Node[] topCountries = new Node[c];
 		getAllNodes(root, nodeArray);
@@ -306,7 +312,7 @@ public class BinarySearchTree {
 		Node max;
 		Node previousMax = new Node("first", 10.0);
 		for(int i = 0; i < c; i++){
-			max = nodeArray[0];
+			max = new Node("max", 0);
 			for(int j = 0; j < nodeArray.length; j++){
 				if(nodeArray[j].getHappiness() > max.getHappiness() && nodeArray[j].getHappiness() < previousMax.getHappiness()){
 					max = nodeArray[j];
