@@ -4,7 +4,23 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import javax.swing.TransferHandler;
-
+/**
+ * COP 3530: Project 4 - Binary Search Trees
+ * <p>
+ * The project 4 class asks the user for the name of a csv file
+ * to read from. It then reads the file and puts the name and 
+ * happiness index from each line into a node and adds it to a 
+ * binary search tree. 
+ * <p>
+ * After reading the file and creating a binary search tree, the
+ * program gives the user a menu with multiple options to choose from. 
+ * Some of the options print the tree in different ways and some of the
+ * options modify the tree. The user can also choose the exit the program by typing the 
+ * appropriate menu option. 
+ * 
+ * @author Riley Tittle
+ * @version 11.16.2023
+ */
 public class Project4 {
 
 	public static void main(String[] args) {

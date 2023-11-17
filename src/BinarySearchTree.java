@@ -1,20 +1,48 @@
 import java.util.NoSuchElementException;
-
+/**
+ * The BinarySearchTree class implements a binary search tree data structure
+ * using the Node class for the individual nodes. The class has methods to insert, find, 
+ * delete, and print the tree to the console in many different ways. 
+ * 
+ * @author Riley Tittle
+ * @version 11.16.2023
+ */
 public class BinarySearchTree {
 	private Node root;
 	private Integer counter = 0;
 	private int numOfNodes = 0;
 	private boolean showInsertMessage = false;
+	/**
+	 * BinarySearchTree method is the constructor for the class.
+	 * It sets the root to null, indicating an empty tree.
+	 */
 	public BinarySearchTree(){
 		root = null;
 	}
-	
+	/**
+	 * setShowInsertMessage method takes a boolean value to set the showInsertMessage
+	 * variable.
+	 * @param value either true or false, depending on whether the user wants the insert message to show
+	 */
 	public void setShowInsertMessage(boolean value){
 		showInsertMessage = value;
 	}
+	/**
+	 * insertMessage prints out a message to the console telling the user
+	 * the country they gave as input has been inserted. 
+	 * @param name the name of the inserted country
+	 * @param happiness the happiness index of the inserted country
+	 */
 	private void insertMessage(String name, double happiness){
 		System.out.println("\n" + name + "with happiness of " + happiness + " is inserted.");
 	}
+	
+	/**
+	 * insert method takes the name of the country and the happiness index of the country
+	 * to be inserted and inserts a new node into the binary search tree. 
+	 * @param name the name of the inserted country
+	 * @param happiness the happiness index of the inserted country
+	 */
 	public void insert(String name, double happiness){
 		Node newNode = new Node(name, happiness);
 		if(root == null){
@@ -59,6 +87,13 @@ public class BinarySearchTree {
 		}//end else
 	}//end insert method
 	
+	/**
+	 * find method takes the name of the country you want to find as a parameter
+	 * and searches through the binary search tree to locate a node with that name.
+	 * It tells the user whether it finds the node or not. 
+	 * @param name the name of the country to be found
+	 * @return the happiness index of the country if it is found, -1 otherwise.
+	 */
 	public double find(String name){
 		String path = "";
 		Node current = root;
@@ -80,9 +115,13 @@ public class BinarySearchTree {
 		System.out.println(name + " is found with happiness of " + current.getHappiness() + "\n");
 		System.out.println("Path to " + name + " is " + path + name);
 		return current.getHappiness();
-	}
-	//I think this works at the moment. Ran with some test code and it
-	//performed fine
+	}//end find method
+	
+	/**
+	 * delete method takes the name of the country you want to delete as a parameter and 
+	 * searches the binary tree for a node with that name, deleting it if found.
+	 * @param name the name of the country to delete from the tree
+	 */
 	public void delete(String name){
 		Node current = root;
 		Node parent = root;
@@ -154,6 +193,12 @@ public class BinarySearchTree {
 		return;
 	}//end delete method
 	
+	/**
+	 * getSuccessor takes the Node you want to delete as a parameter and then
+	 * finds the successor for that node in the tree. 
+	 * @param delNode the node to be deleted
+	 * @return the successor node
+	 */
 	private Node getSuccessor(Node delNode){
 		Node successorParent = delNode;
 		Node successor = delNode;
@@ -169,10 +214,16 @@ public class BinarySearchTree {
 		}
 		return successor;
 	}
-	
+	/**
+	 * printInorder calls the inOrder method, passing the root of the tree as a parameter.
+	 */
 	public void printInorder(){
 		inOrder(root);
 	}//end printInorder
+	/**
+	 * inOrder method is a recursive method that traverses and prints the tree in in-order.
+	 * @param localRoot the root of the tree to be printed. 
+	 */
 	private void inOrder(Node localRoot){
 		if(localRoot != null){
 			inOrder(localRoot.leftChild);
@@ -180,9 +231,16 @@ public class BinarySearchTree {
 			inOrder(localRoot.rightChild);
 		}
 	}
+	/**
+	 * printPreorder calls the preOrder method, passing the root of the tree as a parameter.
+	 */
 	public void printPreOrder(){
 		preOrder(root);
 	}
+	/**
+	 * preOrder method is a recursive method that traverses and prints the tree in pre-order.
+	 * @param localRoot the root of the tree to be printed. 
+	 */
 	private void preOrder(Node localRoot){
 		if(localRoot != null){
 			localRoot.print();
@@ -190,9 +248,16 @@ public class BinarySearchTree {
 			preOrder(localRoot.rightChild);
 		}
 	}
+	/**
+	 * printPostorder calls the postOrder method, passing the root of the tree as a parameter.
+	 */
 	public void printPostorder(){
 		postOrder(root);
 	}
+	/**
+	 * postOrder method is a recursive method that traverses and prints the tree in post-order.
+	 * @param localRoot the root of the tree to be printed. 
+	 */
 	private void postOrder(Node localRoot){
 		if(localRoot != null){
 			postOrder(localRoot.leftChild);
@@ -200,7 +265,12 @@ public class BinarySearchTree {
 			localRoot.print();
 		}
 	}
-	
+	/**
+	 * printBottomCountries takes an integer as a parameter, which represents how many of the
+	 * bottom countries to print to the console. The method finds the bottom c countries, and prints them
+	 * to the console.  
+	 * @param c the number of bottom countries to print
+	 */
 	public void printBottomCountries(int c){
 		Node[] nodeArray = new Node[numOfNodes];
 		Node[] bottomCountries = new Node[c];
@@ -222,7 +292,12 @@ public class BinarySearchTree {
 			node.print();
 		}
 	}
-	
+	/**
+	 * printTopCountries takes an integer as a parameter, which represents how many of the
+	 * top countries to print to the console. The method finds the top c countries, and prints them
+	 * to the console.  
+	 * @param c the number of top countries to print
+	 */
 	public void printTopCountries(int c) {
 		Node[] nodeArray = new Node[numOfNodes];
 		Node[] topCountries = new Node[c];
@@ -244,6 +319,12 @@ public class BinarySearchTree {
 			node.print();
 		}
 	}
+	/**
+	 * getAllNodes traverses the tree just like the preOrder method, but instead of printing the 
+	 * nodes it reaches, it adds them to an array. It adds every node from the tree onto the array.
+	 * @param localRoot the root of the tree to add to the array.
+	 * @param nodeArray the array which will hold all the nodes of the tree.
+	 */
 	private void getAllNodes(Node localRoot, Node[] nodeArray){
 		if(localRoot != null){
 			//localRoot.print();
