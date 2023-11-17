@@ -5,7 +5,7 @@ import java.util.NoSuchElementException;
  * delete, and print the tree to the console in many different ways. 
  * 
  * @author Riley Tittle
- * @version 11.16.2023
+ * @version 11.17.2023
  */
 public class BinarySearchTree {
 	private Node root;
