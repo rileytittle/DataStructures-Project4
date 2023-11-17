@@ -2,14 +2,27 @@ import java.util.NoSuchElementException;
 
 public class BinarySearchTree {
 	private Node root;
+	private Integer counter = 0;
+	private int numOfNodes = 0;
+	private boolean showInsertMessage = false;
 	public BinarySearchTree(){
 		root = null;
 	}
 	
+	public void setShowInsertMessage(boolean value){
+		showInsertMessage = value;
+	}
+	private void insertMessage(String name, double happiness){
+		System.out.println("\n" + name + "with happiness of " + happiness + " is inserted.");
+	}
 	public void insert(String name, double happiness){
 		Node newNode = new Node(name, happiness);
 		if(root == null){
 			root = newNode;
+			numOfNodes++;
+			if(showInsertMessage){
+				insertMessage(name, happiness);
+			}
 		}
 		else{
 			Node current = root;
@@ -24,6 +37,10 @@ public class BinarySearchTree {
 					current = current.leftChild;
 					if(current == null){
 						parent.leftChild = newNode;
+						numOfNodes++;
+						if(showInsertMessage){
+							insertMessage(name, happiness);
+						}
 						return;
 					}
 				}
@@ -31,6 +48,10 @@ public class BinarySearchTree {
 					current = current.rightChild;
 					if(current == null){
 						parent.rightChild = newNode;
+						numOfNodes++;
+						if(showInsertMessage){
+							insertMessage(name, happiness);
+						}
 						return;
 					}//end if
 				}//end else
@@ -52,10 +73,11 @@ public class BinarySearchTree {
 				current = current.rightChild;
 			}
 			if(current == null){
+				System.out.println("\n" + name + " is not found");
 				return -1;
 			}
 		}//end else
-		System.out.println(name + " is found with happiness of " + current.getHappiness());
+		System.out.println(name + " is found with happiness of " + current.getHappiness() + "\n");
 		System.out.println("Path to " + name + " is " + path + name);
 		return current.getHappiness();
 	}
@@ -76,6 +98,7 @@ public class BinarySearchTree {
 				current = current.rightChild;
 			}
 			if(current == null){
+				System.out.println("\n" + name + " is not found.");
 				return;
 			}
 		}
@@ -116,7 +139,7 @@ public class BinarySearchTree {
 			Node successor = getSuccessor(current);
 			if(current == root){
 				root = successor;
-				successor.leftChild = current.leftChild;
+				successor.leftChild = current.leftChild; //this line has been added by me
 			}
 			else if(isLeftChild){
 				parent.leftChild = successor;
@@ -126,17 +149,19 @@ public class BinarySearchTree {
 				successor.leftChild = current.leftChild;
 			}
 		}
+		System.out.println("\n" + name + " is deleted from binary search tree.\n");
+		numOfNodes--;
 		return;
 	}//end delete method
 	
 	private Node getSuccessor(Node delNode){
-		Node successorParent = delNode; //usa
-		Node successor = delNode;//usa
-		Node current = delNode.rightChild; //wakanda
+		Node successorParent = delNode;
+		Node successor = delNode;
+		Node current = delNode.rightChild;
 		while(current != null){
-			successorParent = successor; //1) usa 2)wakanda
-			successor = current;//1) wakanda 2) vienna
-			current = current.leftChild;//1)vienna 2) null
+			successorParent = successor;
+			successor = current;
+			current = current.leftChild;
 		}
 		if(successor != delNode.rightChild){
 			successorParent.leftChild = successor.rightChild;
@@ -176,15 +201,55 @@ public class BinarySearchTree {
 		}
 	}
 	
-	public void preOrderReturnHappiness(Node localRoot, Node max) {
-		
-	}
-	
 	public void printBottomCountries(int c){
-		
+		Node[] nodeArray = new Node[numOfNodes];
+		Node[] bottomCountries = new Node[c];
+		getAllNodes(root, nodeArray);
+		counter = 0;
+		Node min;
+		Node previousMin = new Node("first", 0.0);
+		for(int i = 0; i < c; i++){
+			min = nodeArray[0];
+			for(int j = 0; j < nodeArray.length; j++){
+				if(nodeArray[j].getHappiness() < min.getHappiness() && nodeArray[j].getHappiness() > previousMin.getHappiness()){
+					min = nodeArray[j];
+				}
+			}
+			bottomCountries[i] = min;
+			previousMin = min;
+		}
+		for (Node node : bottomCountries) {
+			node.print();
+		}
 	}
 	
 	public void printTopCountries(int c) {
-		//use priorityq?
+		Node[] nodeArray = new Node[numOfNodes];
+		Node[] topCountries = new Node[c];
+		getAllNodes(root, nodeArray);
+		counter = 0;
+		Node max;
+		Node previousMax = new Node("first", 10.0);
+		for(int i = 0; i < c; i++){
+			max = nodeArray[0];
+			for(int j = 0; j < nodeArray.length; j++){
+				if(nodeArray[j].getHappiness() > max.getHappiness() && nodeArray[j].getHappiness() < previousMax.getHappiness()){
+					max = nodeArray[j];
+				}
+			}
+			topCountries[i] = max;
+			previousMax = max;
+		}
+		for (Node node : topCountries) {
+			node.print();
+		}
+	}
+	private void getAllNodes(Node localRoot, Node[] nodeArray){
+		if(localRoot != null){
+			//localRoot.print();
+			nodeArray[counter++] = localRoot;
+			getAllNodes(localRoot.leftChild, nodeArray);
+			getAllNodes(localRoot.rightChild, nodeArray);
+		}
 	}
 }//end BinarySearchTree class

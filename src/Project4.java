@@ -42,8 +42,8 @@ public class Project4 {
 			recordsRead++;
 		}
 
-		System.out.println("There were " + recordsRead + " records read to build a binary search tree\n");
-
+		System.out.println("\nThere were " + recordsRead + " records read to build a binary search tree\n");
+		theTree.setShowInsertMessage(true);
 		boolean programNotFinished = true;
 		
 		/*
@@ -92,13 +92,19 @@ public class Project4 {
 
 			switch(Integer.parseInt(menuChoice)){
 			case 1:
+				System.out.println();
 				theTree.printInorder();
+				System.out.println();
 				break;
 			case 2:
+				System.out.println();
 				theTree.printPreOrder();
+				System.out.println();
 				break;
 			case 3:
+				System.out.println();
 				theTree.printPostorder();
+				System.out.println();
 				break;
 			case 4:
 				System.out.print("Enter country name: ");
@@ -118,10 +124,18 @@ public class Project4 {
 				theTree.find(nameToFind);
 				break;
 			case 7:
-				
+				System.out.print("Enter the number of countries: ");
+				int numBottomCountries = Integer.parseInt(in.nextLine());
+				System.out.println();
+				theTree.printBottomCountries(numBottomCountries);
+				System.out.println();
 				break;
 			case 8:
-				theTree.printTopCountries(5); 
+				System.out.print("Enter the number of countries: ");
+				int numTopCountries = Integer.parseInt(in.nextLine());
+				System.out.println();
+				theTree.printTopCountries(numTopCountries); 
+				System.out.println();
 				break;
 			case 9:
 				programNotFinished = false;
