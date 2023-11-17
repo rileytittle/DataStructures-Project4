@@ -112,7 +112,7 @@ public class BinarySearchTree {
 				return -1;
 			}
 		}//end else
-		System.out.println(name + " is found with happiness of " + current.getHappiness());
+		System.out.println("\n" + name + " is found with happiness of " + current.getHappiness());
 		System.out.println("Path to " + name + " is " + path + name + "\n");
 		return current.getHappiness();
 	}//end find method
